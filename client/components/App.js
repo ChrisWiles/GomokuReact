@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
 
 export default class App extends Component {
   constructor(props) {
@@ -9,8 +8,13 @@ export default class App extends Component {
 
   render() {
     return (
-      <div>
-        <h1>REACT</h1>
+      <div className="container">
+          <div className="row">
+              <div className="col-md-offset-2 col-md-8">
+                <div className='title'>Gomoku</div>
+                <div className='subTitle'>Tic-Tac-Toe get 5 in a row</div>
+              </div>
+          </div>
       </div>
     )
   }

@@ -1,3 +1,13 @@
 html, body {
   /* Your css here */
 }
+
+.title {
+  text-align: center;
+  font-weight: bold;
+  font-size: 5em;
+}
+.subTitle {
+  text-align: center;
+  font-size: 1em;
+}
