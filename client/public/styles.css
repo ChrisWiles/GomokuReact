@@ -11,3 +11,13 @@ html, body {
   text-align: center;
   font-size: 1em;
 }
+
+.btn-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 25px !important;
+  /*margin: 5px 2px 3px 2px;*/
+}
+.gameBoard{
+  width: 600px;
+}

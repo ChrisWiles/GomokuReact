@@ -30,8 +30,19 @@ export default class GameBoard extends Component {
 
   _createTiles(tiles) {
     return tiles.map((tile, i) => {
-      return <GameTile player={tile.player} id={tile.id} key={i}/>
+      return <GameTile player={tile.player} id={tile.id} key={i} updatePlayerMove={this._updatePlayerMove.bind(this)}/>
     })
+  }
+
+  _updatePlayerMove(id) {
+    console.log(id)
+    const board = this.state.board
+    board.forEach(tile => {
+      if(tile.id === id) {
+        tile.player = 1
+      }
+    })
+    this.setState({board})
   }
 
   render() {
