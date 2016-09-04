@@ -7,16 +7,18 @@ export default class GameTile extends Component {
   }
 
   _handleOnClick() {
-    this.props.updatePlayerMove(this.props.id)
+    if(this.props.isTurn) {
+      this.props.updatePlayerMove(this.props.id)
+    }
   }
 
   _tile(player) {
     if(player === 1) {
-      return <a href="#" className="btn btn-primary btn-circle"></a>
+      return <a href="#" className="btn btn-primary btn-circle"/>
     } else if (player === 2) {
-      return <a href="#" className="btn btn-info btn-circle"></a>
+      return <a href="#" className="btn btn-info btn-circle"/>
     } else {
-      return <a href="#" className="btn btn-default btn-circle" onClick={this._handleOnClick.bind(this)}></a>
+      return <a href="#" className="btn btn-default btn-circle" onClick={this._handleOnClick.bind(this)}/>
     }
   }
 
