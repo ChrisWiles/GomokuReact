@@ -43,8 +43,10 @@ export default class GameLobby extends Component {
 
   _lobby() {
     return (
-      <button type="button" class="btn btn-default" onClick={this._displayState(true, false)}>Join Game</button>
-      <button type="button" class="btn btn-default" onClick={this._displayState(false, true)}>Create Game</button>
+      <div>
+        <button type="button" class="btn btn-default" onClick={this._displayState(true, false)}>Join Game</button>
+        <button type="button" class="btn btn-default" onClick={this._displayState(false, true)}>Create Game</button>
+      </div>
     )
   }
 
