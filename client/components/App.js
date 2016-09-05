@@ -6,12 +6,27 @@ export default class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      isLobby: true
+      isLobby: true,
+      gameID: null
     }
   }
 
-  _setLobby() {
-    this.setState({isLobby: !this.state.isLobby})
+  componentDidMount() {
+    socket.on('player ready', data => this._setLobby(data))
+  }
+
+  _setGameID(id, player) {
+    this.setState({gameID: id})
+    if(player === 'guest') {
+      socket.emit('player ready', {gameID: id})      
+    }
+  }
+
+  _setLobby(data) {
+    console.log(this.state.gameID, data.gameID)
+    if(data.gameID === this.state.gameID) {
+        this.setState({isLobby: !this.state.isLobby})
+    }
   }
 
   render() {
@@ -22,7 +37,13 @@ export default class App extends Component {
                 {/* <div className='subTitle'>Tic-Tac-Toe get 5 in a row</div> */}
                 <div className="gameBoard">
                   <div className='title'>Gomoku</div>
-                  {this.state.isLobby ? <GameLobby setLobby={this._setLobby.bind(this)}/> : <GameBoard setLobby={this._setLobby.bind(this)}/>}
+                  {
+                    this.state.isLobby
+                    ?
+                    <GameLobby setGameID={this._setGameID.bind(this)}/>
+                    :
+                    <GameBoard />
+                  }
                 </div>
               </div>
           </div>
