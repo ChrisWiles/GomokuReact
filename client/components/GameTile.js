@@ -16,7 +16,7 @@ export default class GameTile extends Component {
     if(player === 1) {
       return <a href="#" className="btn btn-primary btn-circle"/>
     } else if (player === 2) {
-      return <a href="#" className="btn btn-info btn-circle"/>
+      return <a href="#" className="btn btn-success btn-circle"/>
     } else {
       return <a href="#" className="btn btn-default btn-circle" onClick={this._handleOnClick.bind(this)}/>
     }

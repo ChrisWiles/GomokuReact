@@ -56,7 +56,8 @@ export default class GameBoard extends Component {
     const board = this.state.board
     board.forEach(tile => {
       if(tile.id === id) {
-        tile.player = 1
+        console.log("this.props.player",this.props.player)
+        tile.player = this.props.player
       }
     })
     this._isWin(board)
@@ -74,7 +75,7 @@ export default class GameBoard extends Component {
     }
 
     this.setState({board})
-    //emitBoard(board)
+    socket.emit('player move', {gameID: this.props.gameID, board: board})
   }
 
   render() {

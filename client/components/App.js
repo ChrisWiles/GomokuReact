@@ -7,7 +7,8 @@ export default class App extends Component {
     super(props)
     this.state = {
       isLobby: true,
-      gameID: null
+      gameID: null,
+      player: 0
     }
   }
 
@@ -18,7 +19,10 @@ export default class App extends Component {
   _setGameID(id, player) {
     this.setState({gameID: id})
     if(player === 'guest') {
-      socket.emit('player ready', {gameID: id})      
+      this.setState({player: 1})
+      socket.emit('player ready', {gameID: id})
+    } else {
+      this.setState({player: 2})
     }
   }
 
@@ -42,7 +46,7 @@ export default class App extends Component {
                     ?
                     <GameLobby setGameID={this._setGameID.bind(this)}/>
                     :
-                    <GameBoard />
+                    <GameBoard gameID={this.state.gameID} player={this.state.player}/>
                   }
                 </div>
               </div>
