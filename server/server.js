@@ -1,12 +1,26 @@
+var app = require('express')();
 var express = require('express');
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+var path = require('path');
 var browserify = require('browserify-middleware');
 var path = require('path');
-
-var app = express();
-
-var port = process.env.PORT || 4000;
-
 var assetFolder = path.join(__dirname, '..', 'client','public');
+
+
+
+//---  socket.io is listening for queues triggered by ----//
+//---  players, then emits information to both     ----//
+io.on('connection', function(socket){
+  console.log('a user connected');
+  socket.on('player move', gameData => {
+    io.emit('player move', gameData)
+  })
+  socket.on('player ready', gameData => {
+    io.emit('player ready', gameData)
+  })
+})
+
 
 // Serve Static Assets
 app.use(express.static(assetFolder));
@@ -24,5 +38,6 @@ app.get('/*', function(req, res){
 })
 
 // Start server
-app.listen(port);
-console.log('Listening on localhost:' + port);
+var port = process.env.PORT || 4000;
+http.listen(port);
+console.log("Listening on localhost:" + port);

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A boiler plate",
   "scripts": {
-    "start": "node server/server.js"
+    "start": "nodemon server/server.js"
   },
   "devDependencies": {
     "nodemon": "^1.10.0"
@@ -17,6 +17,7 @@
     "browserify-middleware": "^7.0.0",
     "express": "^4.14.0",
     "react": "^15.1.0",
-    "react-dom": "^15.0.1"
+    "react-dom": "^15.0.1",
+    "socket.io": "^1.4.8"
   }
 }

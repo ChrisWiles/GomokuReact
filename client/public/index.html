@@ -1,12 +1,14 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-  <head>
-    <link rel="stylesheet" href="/styles.css" />
-    <link rel="stylesheet" href="/bootstrapDarkly.css" />
+<head>
+    <link href="/styles.css" rel="stylesheet">
+    <link href="/bootstrapDarkly.css" rel="stylesheet">
     <title>Gomoku</title>
-  </head>
-  <body>
+</head>
+<body>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>var socket = io();</script>
     <div id='mount'></div>
     <script src="/app-bundle.js"></script>
-  </body>
+</body>
 </html>
