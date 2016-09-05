@@ -110,30 +110,37 @@ export default class GameBoard extends Component {
       	diagonals.push(diagonal)
       }
 
-      function getDiagonals(m) {
-        var s, x, y, d,
-            o = [];
-        for (s = 0; s < m.length; s++) {
-          d = [];
-          for(y = s, x = 0; y >= 0; y--, x++)
-            d.push(m[y][x]);
-          o.push(d);
+      function getDiagonals(array, bottomToTop) {
+        let Ylength = array.length
+        let Xlength = array[0].length
+        let maxLength = Math.max(Xlength, Ylength)
+        let temp
+        let returnArray = []
+        for (let k = 0; k <= 2 * (maxLength - 1); ++k) {
+          temp = []
+          for (let y = Ylength - 1; y >= 0; --y) {
+            let x = k - (bottomToTop ? Ylength - y : y)
+            if (x >= 0 && x < Xlength) {
+              temp.push(array[y][x])
+            }
+          }
+          if (temp.length > 0) {
+            returnArray.push(temp.join(''))
+          }
         }
-        for (s = 1; s < m[0].length; s++) {
-          d = [];
-          for(y = m.length - 1, x = s; x < m[0].length; y--, x++)
-            d.push(m[y][x]);
-          o.push(d);
-        }
-        return o;
+        return returnArray;
       }
-      
-      const diagonalsRight = getDiagonals(diagonals)
-      const dRight = []
+
+      const diagonalsRight = getDiagonals(diagonals, true)
+      const diagonalsLeft = getDiagonals(diagonals, false)
+      const d = []
       diagonalsRight.forEach(ele => {
-        dRight.push(...ele, '0')
+        d.push(...ele, '0')
       })
-      return /(1{5,5})|(2{5,5})/.test(dRight.join(''))
+      diagonalsLeft.forEach(ele => {
+        d.push(...ele, '0')
+      })
+      return /(1{5,5})|(2{5,5})/.test(d.join(''))
     }
 
 
