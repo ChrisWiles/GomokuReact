@@ -19,6 +19,9 @@ io.on('connection', function(socket){
   socket.on('player ready', gameData => {
     io.emit('player ready', gameData)
   })
+  socket.on('player win', gameData => {
+    io.emit('player win', gameData)
+  })
 })
 
 
