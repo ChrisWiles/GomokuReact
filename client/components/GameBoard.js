@@ -7,7 +7,8 @@ export default class GameBoard extends Component {
     super(props)
     this.state = {
       board: [],
-      isTurn: true
+      p1Turn: true,
+      p2Turn: false
     }
   }
 
@@ -18,6 +19,7 @@ export default class GameBoard extends Component {
 
   _updateBoard(data) {
     if(data.gameID === this.props.gameID) {
+      this.setState({p1Turn: !this.state.p1Turn, p2Turn: !this.state.p2Turn})
       this.setState({board: data.board})
     }
   }
@@ -34,17 +36,28 @@ export default class GameBoard extends Component {
     	})
     	board.push(Row)
     })
-
     this.setState({board})
   }
 
   _createTiles(tiles) {
     const b = []
     tiles.forEach(ele => b.push(...ele))
+    let isTurn = false
+    if(this.props.player === 1) {
+      if(this.state.p1Turn) {
+        isTurn = true
+      }
+    }
+    if(this.props.player === 2) {
+      if(this.state.p2Turn) {
+        isTurn = true
+      }
+    }
+
     return b.map((tile, i) => {
       return (
         <GameTile
-          isTurn={this.state.isTurn}
+          isTurn={isTurn}
           player={tile.player}
           id={tile.id}
           key={i}
@@ -55,8 +68,6 @@ export default class GameBoard extends Component {
   }
 
   _updatePlayerMove(id) {
-    //this.setState({isTurn: false})
-    console.log(id)
     const b = []
     this.state.board.forEach(ele => b.push(...ele))
     b.forEach(tile => {
@@ -134,6 +145,7 @@ export default class GameBoard extends Component {
       const diagonalsRight = getDiagonals(diagonals, true)
       const diagonalsLeft = getDiagonals(diagonals, false)
       const d = []
+
       diagonalsRight.forEach(ele => {
         d.push(...ele, '0')
       })
@@ -146,6 +158,7 @@ export default class GameBoard extends Component {
 
     if(horizontal(b,p) || vertical(b,p) || diagonal(board,p)) {
       console.log('Player', p, 'Won')
+      socket.emit('player won', {gameID: this.props.gameID, player: p})
     }
 
     this.setState({board})
