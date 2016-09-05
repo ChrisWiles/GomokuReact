@@ -13,6 +13,13 @@ export default class GameBoard extends Component {
 
   componentDidMount() {
     this._initializeBoard()
+    socket.on('player move', data => this._updateBoard(data))
+  }
+
+  _updateBoard(data) {
+    if(data.gameID === this.props.gameID) {
+      this.setState({board: data.board})
+    }
   }
 
   _initializeBoard() {
