@@ -13,7 +13,6 @@ export default class GameLobby extends Component {
 
   _handleChange(event) {
     this.setState({code: event.target.value})
-    console.log(this.state.code)
   }
 
   _genAccessCode() {
@@ -25,14 +24,12 @@ export default class GameLobby extends Component {
 
 
   _createGame() {
-    const code = this._genAccessCode()
-    // call backend
-    return <h2>{`Access Code: ${code}`}</h2>
+    return <h2>{`Access Code: ${this.state.code}`}</h2>
   }
 
   _handleOnSubmit(event) {
     event.preventDefault()
-    console.log("Code: ", this.state.code)
+    this.props.setGameID(this.state.code, 'guest')
     this.setState({code: ''})
   }
 
@@ -46,11 +43,6 @@ export default class GameLobby extends Component {
     )
   }
 
-  _handleOnClick() {
-
-  }
-
-
   _chooseGame() {
     return (
       <div>
@@ -61,12 +53,16 @@ export default class GameLobby extends Component {
   }
 
   _displayState(join, create) {
-    console.log('clicked')
     this.setState({
           chooseGame: false,
           join: join,
           create: create
         })
+    if(create) {
+      const code = this._genAccessCode()
+      this.setState({code: code})
+      this.props.setGameID(code, 'host')
+    }
   }
 
   _displayLogic() {
