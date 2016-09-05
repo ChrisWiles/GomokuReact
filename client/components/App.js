@@ -14,6 +14,17 @@ export default class App extends Component {
 
   componentDidMount() {
     socket.on('player ready', data => this._setLobby(data))
+    socket.on('player won', data => this._win(data))
+  }
+
+  _win(data) {
+    if(data.gameID === this.state.gameID) {
+      if(this.state.player === +data.player) {
+        alert('You Won')
+      } else {
+        alert('You Lost')
+      }
+    }
   }
 
   _setGameID(id, player) {
@@ -27,7 +38,6 @@ export default class App extends Component {
   }
 
   _setLobby(data) {
-    console.log(this.state.gameID, data.gameID)
     if(data.gameID === this.state.gameID) {
         this.setState({isLobby: !this.state.isLobby})
     }
@@ -38,7 +48,6 @@ export default class App extends Component {
       <div className="container">
           <div className="row">
               <div className="col-md-offset-2 col-md-8">
-                {/* <div className='subTitle'>Tic-Tac-Toe get 5 in a row</div> */}
                 <div className="gameBoard">
                   <div className='title'>Gomoku</div>
                   {
