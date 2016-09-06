@@ -79,6 +79,9 @@ export default class GameBoard extends Component {
   }
 
   _isWin(board, p) {
+    // vertical, horizontal, diagonal each create a string from P1 & P2 tile values
+    // a 0 value is inserted after each row to create a break
+    // regex then checks for 5 in a row
     const b = []
     board.forEach(ele => b.push(...ele))
 
