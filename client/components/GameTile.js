@@ -1,10 +1,6 @@
 import React, { Component } from 'react'
 
 export default class GameTile extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {}
-  }
 
   _handleOnClick() {
     if(this.props.isTurn) {

@@ -22,7 +22,6 @@ export default class GameLobby extends Component {
     }).join('')
   }
 
-
   _createGame() {
     return <h2>{`Access Code: ${this.state.code}`}</h2>
   }
