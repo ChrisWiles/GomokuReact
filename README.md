@@ -1,10 +1,7 @@
 ##   
 
-Gomoku
+**Gomoku**
 
-**
-
- **
 
 **Gomoku** is an [abstract
 strategy](https://en.wikipedia.org/wiki/Abstract_strategy) [board
@@ -18,7 +15,7 @@ diagonally.
 
  
 
-m,n,k-game
+**m,n,k-game**
 
  
 
