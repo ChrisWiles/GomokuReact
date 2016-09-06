@@ -43,13 +43,26 @@ export default class App extends Component {
     }
   }
 
+  _titleColor() {
+    const player = this.state.player
+    if(player === 1) {
+      return {color: '#375A7F'}
+    }
+    if(player === 2) {
+      return {color: '#00BC8C'}
+    }
+    if(player === 0) {
+      return {color: 'white'}
+    }
+  }
+
   render() {
     return (
       <div className="container">
           <div className="row">
               <div className="col-md-offset-2 col-md-8">
                 <div className="gameBoard">
-                  <div className='title'>Gomoku</div>
+                  <div className='title' style={this._titleColor()}>Gomoku</div>
                   {
                     this.state.isLobby
                     ?
