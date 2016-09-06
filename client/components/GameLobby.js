@@ -53,10 +53,10 @@ export default class GameLobby extends Component {
 
   _displayState(join, create) {
     this.setState({
-          chooseGame: false,
-          join: join,
-          create: create
-        })
+      chooseGame: false,
+      join: join,
+      create: create
+    })
     if(create) {
       const code = this._genAccessCode()
       this.setState({code: code})

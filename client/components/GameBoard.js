@@ -19,22 +19,30 @@ export default class GameBoard extends Component {
 
   _updateBoard(data) {
     if(data.gameID === this.props.gameID) {
-      this.setState({p1Turn: !this.state.p1Turn, p2Turn: !this.state.p2Turn})
-      this.setState({board: data.board})
+      this.setState({
+        p1Turn: !this.state.p1Turn,
+        p2Turn: !this.state.p2Turn
+      })
+      this.setState({
+        board: data.board
+      })
     }
   }
 
   _initializeBoard() {
     const board = []
     const rows = 'ABCDEFGHIJKLMNO'.split('')
-    const cols = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+    const cols = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
 
     rows.forEach(row => {
-    	const Row = []
-    	cols.forEach(col => {
-    		Row.push({id: row + col, player: 0})
-    	})
-    	board.push(Row)
+      const Row = []
+      cols.forEach(col => {
+        Row.push({
+          id: row + col,
+          player: 0
+        })
+      })
+      board.push(Row)
     })
     this.setState({board})
   }
@@ -43,19 +51,15 @@ export default class GameBoard extends Component {
     const b = []
     tiles.forEach(ele => b.push(...ele))
     let isTurn = false
-    if(this.props.player === 1) {
-      if(this.state.p1Turn) {
-        isTurn = true
-      }
+    if(this.props.player === 1 && this.state.p1Turn) {
+      isTurn = true
     }
-    if(this.props.player === 2) {
-      if(this.state.p2Turn) {
-        isTurn = true
-      }
+    if(this.props.player === 2 && this.state.p2Turn) {
+      isTurn = true
     }
 
     return b.map((tile, i) => {
-      return (
+      return(
         <GameTile
           isTurn={isTurn}
           player={tile.player}
@@ -86,13 +90,13 @@ export default class GameBoard extends Component {
     board.forEach(ele => b.push(...ele))
 
     const rows = 'ABCDEFGHIJKLMNO'.split('')
-    const cols = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
+    const cols = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
 
     function horizontal(b, p) {
       const Row = []
       rows.forEach(char => {
         b.forEach(item => {
-          if(item.id.slice(0,1) === char) {
+          if(item.id.slice(0, 1) === char) {
             Row.push(item.player.toString())
           }
         })
@@ -117,11 +121,11 @@ export default class GameBoard extends Component {
     function diagonal(board, p) {
       const diagonals = []
       for(let i = 0; i < board.length; i++) {
-      	const diagonal = []
-      	for(let j = 0; j < board[i].length; j++) {
-      		diagonal.push(board[i][j].player)
-      	}
-      	diagonals.push(diagonal)
+        const diagonal = []
+        for(let j = 0; j < board[i].length; j++) {
+          diagonal.push(board[i][j].player)
+        }
+        diagonals.push(diagonal)
       }
 
       function getDiagonals(array, bottomToTop) {
@@ -130,15 +134,15 @@ export default class GameBoard extends Component {
         let maxLength = Math.max(Xlength, Ylength)
         let temp
         let returnArray = []
-        for (let k = 0; k <= 2 * (maxLength - 1); ++k) {
+        for(let k = 0; k <= 2 * (maxLength - 1); ++k) {
           temp = []
-          for (let y = Ylength - 1; y >= 0; --y) {
+          for(let y = Ylength - 1; y >= 0; --y) {
             let x = k - (bottomToTop ? Ylength - y : y)
-            if (x >= 0 && x < Xlength) {
+            if(x >= 0 && x < Xlength) {
               temp.push(array[y][x])
             }
           }
-          if (temp.length > 0) {
+          if(temp.length > 0) {
             returnArray.push(temp.join(''))
           }
         }
@@ -159,18 +163,25 @@ export default class GameBoard extends Component {
     }
 
 
-    if(horizontal(b,p) || vertical(b,p) || diagonal(board,p)) {
+    if(horizontal(b, p) || vertical(b, p) || diagonal(board, p)) {
       console.log('Player', p, 'Won')
-      socket.emit('player won', {gameID: this.props.gameID, player: p})
+      socket.emit('player won', {
+        gameID: this.props.gameID,
+        player: p
+      })
     }
 
     this.setState({board})
-    socket.emit('player move', {gameID: this.props.gameID, board: board})
+
+    socket.emit('player move', {
+      gameID: this.props.gameID,
+      board: board
+    })
   }
 
   render() {
     const Tiles = this._createTiles(this.state.board)
-    return (
+    return(
       <div>{Tiles}</div>
     )
   }

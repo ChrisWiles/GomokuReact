@@ -11,9 +11,9 @@ export default class GameTile extends Component {
   _tile(player) {
     if(player === 1) {
       return <a href="#" className="btn btn-primary btn-circle"/>
-    } else if (player === 2) {
+    } else if(player === 2) {
       return <a href="#" className="btn btn-success btn-circle"/>
-    } else if (player === 'win'){
+    } else if(player === 'win') {
       return <a href="#" className="btn btn-danger btn-circle"/>
     } else {
       return <a href="#" className="btn btn-default btn-circle" onClick={this._handleOnClick.bind(this)}/>
@@ -21,7 +21,7 @@ export default class GameTile extends Component {
   }
 
   render() {
-    return (
+    return(
       this._tile(this.props.player)
     )
   }
