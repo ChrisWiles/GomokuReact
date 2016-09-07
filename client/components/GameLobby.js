@@ -9,6 +9,9 @@ export default class GameLobby extends Component {
       create: false,
       code: ''
     }
+    // bind your event handlers in the constructor so they are only bound once for every instance
+    this._handleOnSubmit = this._handleOnSubmit.bind(this)
+    this._handleChange = this._handleChange.bind(this)
   }
 
   _handleChange(event) {
@@ -34,9 +37,9 @@ export default class GameLobby extends Component {
 
   _joinGame() {
     return (
-      <form onSubmit={this._handleOnSubmit.bind(this)}>
+      <form onSubmit={this._handleOnSubmit}>
         <div className="form-group">
-          <input type="text" value={this.state.code} placeholder='Enter Access Code' onChange={this._handleChange.bind(this)}/>
+          <input type="text" value={this.state.code} placeholder='Enter Access Code' onChange={this._handleChange}/>
         </div>
       </form>
     )

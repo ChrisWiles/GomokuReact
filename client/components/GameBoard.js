@@ -10,6 +10,8 @@ export default class GameBoard extends Component {
       p1Turn: true,
       p2Turn: false
     }
+    // bind your event handlers in the constructor so they are only bound once for every instance
+    this._updatePlayerMove = this._updatePlayerMove.bind(this)
   }
 
   componentDidMount() {
@@ -65,7 +67,7 @@ export default class GameBoard extends Component {
           player={tile.player}
           id={tile.id}
           key={i}
-          updatePlayerMove={this._updatePlayerMove.bind(this)}
+          updatePlayerMove={this._updatePlayerMove}
         />
       )
     })
