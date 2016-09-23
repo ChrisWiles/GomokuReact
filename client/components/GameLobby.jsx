@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 
 export default class GameLobby extends Component {
   constructor(props) {
@@ -20,7 +20,7 @@ export default class GameLobby extends Component {
 
   _genAccessCode() {
     const char = 'abcdefghijklmnopqrztuvwxyz1234567890'.split('')
-    return [0,0,0,0].map(code => {
+    return [0, 0, 0, 0].map(code => {
       return char[Math.floor(Math.random() * char.length)]
     }).join('')
   }
@@ -55,12 +55,8 @@ export default class GameLobby extends Component {
   }
 
   _displayState(join, create) {
-    this.setState({
-      chooseGame: false,
-      join: join,
-      create: create
-    })
-    if(create) {
+    this.setState({chooseGame: false, join: join, create: create})
+    if (create) {
       const code = this._genAccessCode()
       this.setState({code: code})
       this.props.setGameID(code, 'host')
@@ -69,9 +65,12 @@ export default class GameLobby extends Component {
 
   _displayLogic() {
     const {chooseGame, join, create} = this.state
-    if(chooseGame) return this._chooseGame()
-    if(join) return this._joinGame()
-    if(create) return this._createGame()
+    if (chooseGame)
+      return this._chooseGame()
+    if (join)
+      return this._joinGame()
+    if (create)
+      return this._createGame()
   }
 
   render() {

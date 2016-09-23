@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import GameBoard from './GameBoard'
 import GameLobby from './GameLobby'
 
@@ -18,8 +18,8 @@ export default class App extends Component {
   }
 
   _win(data) {
-    if(data.gameID === this.state.gameID) {
-      if(this.state.player === +data.player) {
+    if (data.gameID === this.state.gameID) {
+      if (this.state.player === +data.player) {
         alert('You Won')
       } else {
         alert('You Lost')
@@ -30,7 +30,7 @@ export default class App extends Component {
   _setGameID(id, player) {
     this.setState({gameID: id})
 
-    if(player === 'guest') {
+    if (player === 'guest') {
       this.setState({player: 1})
       socket.emit('player ready', {gameID: id})
     } else {
@@ -39,7 +39,7 @@ export default class App extends Component {
   }
 
   _setLobby(data) {
-    if(data.gameID === this.state.gameID) {
+    if (data.gameID === this.state.gameID) {
       this.setState({
         isLobby: !this.state.isLobby
       })
@@ -48,28 +48,29 @@ export default class App extends Component {
 
   _titleColor() {
     const player = this.state.player
-    if(player === 1) return {color: '#375A7F'}
-    if(player === 2) return {color: '#00BC8C'}
-    if(player === 0) return {color: 'white'}
-  }
+    if (player === 1)
+      return {color: '#375A7F'}
+    if (player === 2)
+      return {color: '#00BC8C'}
+    if (player === 0)
+      return {color: 'white'}
+    }
 
   render() {
-    return(
+    return (
       <div className="container">
-          <div className="row">
-              <div className="col-md-offset-2 col-md-8">
-                <div className="gameBoard">
-                  <div className='title' style={this._titleColor()}>Gomoku</div>
-                  {
-                    this.state.isLobby
-                    ?
-                    <GameLobby setGameID={this._setGameID.bind(this)}/>
-                    :
-                    <GameBoard gameID={this.state.gameID} player={this.state.player}/>
-                  }
-                </div>
-              </div>
+        <div className="row">
+          <div className="col-md-offset-2 col-md-8">
+            <div className="gameBoard">
+              <div className='title' style={this._titleColor()}>Gomoku</div>
+              {
+                this.state.isLobby
+                ? <GameLobby setGameID={this._setGameID.bind(this)}/>
+                : <GameBoard gameID={this.state.gameID} player={this.state.player}/>
+              }
+            </div>
           </div>
+        </div>
       </div>
     )
   }
