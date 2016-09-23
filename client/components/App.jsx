@@ -56,6 +56,14 @@ export default class App extends Component {
       return {color: 'white'}
     }
 
+  _changeLobby(lobby) {
+    if(lobby) {
+      return <GameLobby setGameID={this._setGameID.bind(this)}/>
+    } else {
+      return <GameBoard gameID={this.state.gameID} player={this.state.player}/>
+    }
+  }
+
   render() {
     return (
       <div className="container">
@@ -63,11 +71,7 @@ export default class App extends Component {
           <div className="col-md-offset-2 col-md-8">
             <div className="gameBoard">
               <div className='title' style={this._titleColor()}>Gomoku</div>
-              {
-                this.state.isLobby
-                ? <GameLobby setGameID={this._setGameID.bind(this)}/>
-                : <GameBoard gameID={this.state.gameID} player={this.state.player}/>
-              }
+              {this._changeLobby(this.state.isLobby)}
             </div>
           </div>
         </div>
