@@ -1,6 +1,6 @@
-import React, {Component} from 'react'
+import React, {Component, PropTypes} from 'react'
 
-export default class GameTile extends Component {
+class GameTile extends Component {
   constructor(props) {
     super(props)
     // bind your event handlers in the constructor so they are only bound once for every instance
@@ -8,8 +8,9 @@ export default class GameTile extends Component {
   }
 
   _handleOnClick() {
-    if (this.props.isTurn) {
-      this.props.updatePlayerMove(this.props.id)
+    const {isTurn, updatePlayerMove, id} = this.props
+    if (isTurn) {
+      updatePlayerMove(id)
     }
   }
 
@@ -26,6 +27,12 @@ export default class GameTile extends Component {
   }
 
   render() {
-    return (this._tile(this.props.player))
+    return this._tile(this.props.player)
   }
 }
+
+GameTile.propTypes = {
+  isTurn: PropTypes.bool.isRequired,
+}
+
+export default GameTile

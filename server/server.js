@@ -1,11 +1,11 @@
-var app = require('express')();
-var express = require('express');
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
-var path = require('path');
-var browserify = require('browserify-middleware');
-var path = require('path');
-var assetFolder = path.join(__dirname, '..', 'client','public');
+let app = require('express')();
+let express = require('express');
+let http = require('http').Server(app);
+let io = require('socket.io')(http);
+let path = require('path');
+let browserify = require('browserify-middleware');
+let path = require('path');
+let assetFolder = path.join(__dirname, '..', 'client','public');
 
 
 
@@ -41,6 +41,6 @@ app.get('/*', function(req, res){
 })
 
 // Start server
-var port = process.env.PORT || 4000;
+let port = process.env.PORT || 4000;
 http.listen(port);
 console.log("Listening on localhost:" + port);

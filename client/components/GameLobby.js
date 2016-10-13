@@ -1,6 +1,6 @@
-import React, {Component} from 'react'
+import React, {Component, PropTypes} from 'react'
 
-export default class GameLobby extends Component {
+class GameLobby extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -81,3 +81,11 @@ export default class GameLobby extends Component {
     )
   }
 }
+
+
+
+GameLobby.propTypes = {
+  setGameID: PropTypes.func.isRequired
+}
+
+export default GameLobby

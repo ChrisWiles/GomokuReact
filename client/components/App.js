@@ -5,6 +5,7 @@ import GameLobby from './GameLobby'
 export default class App extends Component {
   constructor(props) {
     super(props)
+    this._setGameID = this._setGameID.bind(this)
     this.state = {
       isLobby: true,
       gameID: null,
@@ -57,10 +58,11 @@ export default class App extends Component {
     }
 
   _changeLobby(lobby) {
+    const {gameID, player} = this.state
     if(lobby) {
-      return <GameLobby setGameID={this._setGameID.bind(this)}/>
+      return <GameLobby setGameID={this._setGameID}/>
     } else {
-      return <GameBoard gameID={this.state.gameID} player={this.state.player}/>
+      return <GameBoard gameID={gameID} player={player}/>
     }
   }
 

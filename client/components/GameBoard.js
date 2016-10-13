@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React, {Component, PropTypes} from 'react'
 import GameTile from './GameTile'
-import { emitBoard } from '../models/game'
+import {emitBoard} from '../models/game'
 
-export default class GameBoard extends Component {
+class GameBoard extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -188,3 +188,10 @@ export default class GameBoard extends Component {
     )
   }
 }
+
+
+GameBoard.propTypes = {
+  gameID: PropTypes.string.isRequired
+}
+
+export default GameBoard
