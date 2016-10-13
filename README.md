@@ -1,6 +1,4 @@
-##   
-
-**Gomoku**
+## Gomoku
 
 
 
@@ -16,9 +14,7 @@ diagonally.
 
  
 
-**m,n,k-game**
-
- 
+## m,n,k-game
 
 An **_m,n,k_-game** is an
 abstract [board game](https://en.wikipedia.org/wiki/Board_game) in
@@ -32,9 +28,10 @@ is also called a **_k_-in-a-row** game on _m_×_n_ board.
 
  
 
-**Tech Stack **
+## Tech Stack
 
 React, Express, Socket.io, bootstrap
 
-**Notes**
+## Notes
+
 I have my custom methods be prefixed with an underscore to make them easier to identify.

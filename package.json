@@ -1,7 +1,7 @@
 {
-  "name": "boilerplate",
+  "name": "Gomoku",
   "version": "1.0.0",
-  "description": "A boiler plate",
+  "description": "Chirs Wiles",
   "scripts": {
     "start": "node server/server.js"
   },
