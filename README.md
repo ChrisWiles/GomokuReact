@@ -12,7 +12,6 @@ The winner is the first
 player to get an unbroken row of five stones horizontally, vertically, or
 diagonally.
 
- 
 
 ## m,n,k-game
 
@@ -26,11 +25,22 @@ vertically, or diagonally.Thus, [tic-tac-toe](https://en.wikipedia.org/wiki/Tic
 free-style [gomoku](https://en.wikipedia.org/wiki/Gomoku) is the 19,19,5-game. _m,n,k_-game
 is also called a **_k_-in-a-row** game on _m_×_n_ board.
 
- 
+### User Stories
+- User wins when they get 5 in a row
+- User can create a game
+- User can another users game
 
 ## Tech Stack
+* [React](https://facebook.github.io/react/docs/getting-started.html) - Open-source JavaScript library providing a view for data rendered as HTML
+* [Heroku](https://devcenter.heroku.com/categories/reference) - Create, deploy, and manage apps in the cloud
+* [Socket.io](http://www.material-ui.com/) - Google's material design UI components built with React.
+* [Express](http://expressjs.com/) - Fast, unopinionated, minimalist web framework for node.
+* [Bootstrap](getbootstrap.com) -  a sleek, intuitive, and powerful mobile first front-end framework for faster and easier web development.
 
-React, Express, Socket.io, bootstrap
+## Todos
+- Tests
+- Chat
+- Convert to webpack
 
 ## Notes
 
