@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import GameTile from './GameTile'
 import isWin from '../utli/isWin'
+import initializeBoard from '../utli/initializeBoard'
 
 class GameBoard extends Component {
   constructor(props) {
@@ -15,7 +16,9 @@ class GameBoard extends Component {
   }
 
   componentDidMount() {
-    this._initializeBoard()
+    const board = initializeBoard()
+    this.setState({board})
+    
     socket.on('player move', data => this._updateBoard(data))
   }
 
@@ -27,24 +30,6 @@ class GameBoard extends Component {
       })
       this.setState({board: data.board})
     }
-  }
-
-  _initializeBoard() {
-    const board = []
-    const rows = 'ABCDEFGHIJKLMNO'.split('')
-    const cols = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
-
-    rows.forEach(row => {
-      const Row = []
-      cols.forEach(col => {
-        Row.push({
-          id: row + col,
-          player: 0
-        })
-      })
-      board.push(Row)
-    })
-    this.setState({board})
   }
 
   _createTiles({board, p1Turn, p2Turn}, {player}) {
