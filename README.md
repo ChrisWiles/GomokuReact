@@ -41,6 +41,7 @@ is also called a **_k_-in-a-row** game on _m_×_n_ board.
 - Tests
 - Chat
 - Convert to webpack
+- Highlight the winning row
 
 ## Notes
 
