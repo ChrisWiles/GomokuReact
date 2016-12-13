@@ -5,7 +5,7 @@ import GameLobby from './GameLobby'
 export default class App extends Component {
   constructor(props) {
     super(props)
-    this._setGameID = this._setGameID.bind(this)
+    this.setGameID = this.setGameID.bind(this)
     this.state = {
       isLobby: true,
       gameID: null,
@@ -14,11 +14,11 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    socket.on('player ready', data => this._setLobby(data))
-    socket.on('player won', data => this._win(data))
+    socket.on('player ready', data => this.setLobby(data))
+    socket.on('player won', data => this.win(data))
   }
 
-  _win(data) {
+  win(data) {
     if (data.gameID === this.state.gameID) {
       if (this.state.player === +data.player) {
         alert('You Won')
@@ -28,7 +28,7 @@ export default class App extends Component {
     }
   }
 
-  _setGameID(id, player) {
+  setGameID(id, player) {
     this.setState({gameID: id})
 
     if (player === 'guest') {
@@ -39,7 +39,7 @@ export default class App extends Component {
     }
   }
 
-  _setLobby(data) {
+  setLobby(data) {
     if (data.gameID === this.state.gameID) {
       this.setState({
         isLobby: !this.state.isLobby
@@ -47,7 +47,7 @@ export default class App extends Component {
     }
   }
 
-  _titleColor() {
+  titleColor() {
     const player = this.state.player
     if (player === 1)
       return {color: '#375A7F'}
@@ -57,10 +57,10 @@ export default class App extends Component {
       return {color: 'white'}
     }
 
-  _changeLobby(lobby) {
+  changeLobby(lobby) {
     const {gameID, player} = this.state
     if(lobby) {
-      return <GameLobby setGameID={this._setGameID}/>
+      return <GameLobby setGameID={this.setGameID}/>
     } else {
       return <GameBoard gameID={gameID} player={player}/>
     }
@@ -72,8 +72,8 @@ export default class App extends Component {
         <div className="row">
           <div className="col-md-offset-2 col-md-8">
             <div className="gameBoard">
-              <div className='title' style={this._titleColor()}>Gomoku</div>
-              {this._changeLobby(this.state.isLobby)}
+              <div className='title' style={this.titleColor()}>Gomoku</div>
+              {this.changeLobby(this.state.isLobby)}
             </div>
           </div>
         </div>

@@ -12,17 +12,17 @@ class GameBoard extends Component {
       p2Turn: false
     }
     // bind your event handlers in the constructor so they are only bound once for every instance
-    this._updatePlayerMove = this._updatePlayerMove.bind(this)
+    this.updatePlayerMove = this.updatePlayerMove.bind(this)
   }
 
   componentDidMount() {
     const board = initializeBoard()
     this.setState({board})
-    
-    socket.on('player move', data => this._updateBoard(data))
+
+    socket.on('player move', data => this.updateBoard(data))
   }
 
-  _updateBoard(data) {
+  updateBoard(data) {
     if (data.gameID === this.props.gameID) {
       this.setState({
         p1Turn: !this.state.p1Turn,
@@ -32,7 +32,7 @@ class GameBoard extends Component {
     }
   }
 
-  _createTiles({board, p1Turn, p2Turn}, {player}) {
+  createTiles({board, p1Turn, p2Turn}, {player}) {
     const b = []
     board.forEach(ele => b.push(...ele))
 
@@ -47,13 +47,13 @@ class GameBoard extends Component {
           player={tile.player}
           id={tile.id}
           key={i}
-          updatePlayerMove={this._updatePlayerMove}
+          updatePlayerMove={this.updatePlayerMove}
         />
       )
     })
   }
 
-  _updatePlayerMove(id) {
+  updatePlayerMove(id) {
     const {board} = this.state
     const {gameID, player} = this.props
 
@@ -76,7 +76,7 @@ class GameBoard extends Component {
   }
 
   render() {
-    const Tiles = this._createTiles(this.state, this.props)
+    const Tiles = this.createTiles(this.state, this.props)
     return(
       <div>{Tiles}</div>
     )
